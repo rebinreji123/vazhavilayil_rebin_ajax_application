@@ -103,3 +103,34 @@
 
 })();
 
+document.addEventListener('DOMContentLoaded', function() {
+  fetchEarbudsData();
+});
+
+function fetchEarbudsData() {
+  fetch('API_URL') // Replace 'API_URL' with the actual API URL
+  .then(response => {
+      if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+  })
+  .then(data => {
+      updateView(data);
+  })
+  .catch(error => {
+      console.error('Error fetching data: ', error);
+      // Handle errors here, like showing an error message
+  });
+}
+function updateView(data) {
+  // Update the HTML elements with the data from the API
+  // Example: document.getElementById('hotspot-1').textContent = data.someProperty;
+}
+function showLoading() {
+  // Code to show loading indicator
+}
+
+function hideLoading() {
+  // Code to hide loading indicator
+}
