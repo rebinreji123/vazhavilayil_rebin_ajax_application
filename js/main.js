@@ -134,3 +134,52 @@ function showLoading() {
 function hideLoading() {
   // Code to hide loading indicator
 }
+document.addEventListener('DOMContentLoaded', function() {
+  fetchEarbudsData();
+});
+
+function showLoadingSpinner() {
+  const spinner = document.querySelector('.spinner');
+  spinner.style.display = 'block';
+}
+
+function hideLoadingSpinner() {
+  const spinner = document.querySelector('.spinner');
+  spinner.style.display = 'none';
+}
+
+function showError(message) {
+  const errorContainer = document.getElementById('error');
+  errorContainer.textContent = message;
+  errorContainer.style.display = 'block';
+}
+
+async function fetchEarbudsData() {
+  showLoadingSpinner();
+  try {
+      const response = await fetch('API_URL'); // Replace 'API_URL' with your actual API URL
+      if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const data = await response.json();
+      updateView(data);
+  } catch (error) {
+      console.error('Fetching data failed:', error);
+      showError('Failed to load data. Please try again later.');
+  } finally {
+      hideLoadingSpinner();
+  }
+}
+
+function updateView(data) {
+  // Assuming data is an array of objects
+  const template = document.getElementById('earbud-template'); // Replace with your template ID
+  const container = document.getElementById('earbud-container'); // Container to append items
+
+  data.forEach(item => {
+      const clone = template.content.cloneNode(true);
+      // Populate clone with item data
+      // Example: clone.querySelector('.name').textContent = item.name;
+      container.appendChild(clone);
+  });
+}
