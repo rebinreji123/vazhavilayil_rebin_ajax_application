@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function fetchEarbudsData() {
-  fetch('API_URL') // Replace 'API_URL' with the actual API URL
+  fetch('https://swiftpixel.com/earbud/api/infoboxes and https://swiftpixel.com/earbud/api/materials') // Replace 'API_URL' with the actual API URL
   .then(response => {
       if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -155,9 +155,9 @@ function showError(message) {
 }
 
 async function fetchEarbudsData() {
-  showLoadingSpinner();
+  showLoadingSpinner(); // Show spinner before fetching data
   try {
-      const response = await fetch('https://swiftpixel.com/earbud/api/infoboxes and https://swiftpixel.com/earbud/api/materials'); // Replace 'API_URL' with your actual API URL
+      const response = await fetch('https://swiftpixel.com/earbud/api/infoboxes and https://swiftpixel.com/earbud/api/materials');
       if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
       }
@@ -167,9 +167,15 @@ async function fetchEarbudsData() {
       console.error('Fetching data failed:', error);
       showError('Failed to load data. Please try again later.');
   } finally {
-      hideLoadingSpinner();
+      hideLoadingSpinner(); // Hide spinner after fetching data
   }
 }
+
+function hideLoadingSpinner() {
+  const spinner = document.getElementById('spinner'); // Make sure this ID matches your spinner's ID
+  spinner.style.display = 'none';
+}
+
 
 function updateView(data) {
   // Assuming data is an array of objects
