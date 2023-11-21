@@ -157,7 +157,7 @@ function showError(message) {
 async function fetchEarbudsData() {
   showLoadingSpinner();
   try {
-      const response = await fetch('API_URL'); // Replace 'API_URL' with your actual API URL
+      const response = await fetch('https://swiftpixel.com/earbud/api/infoboxes and https://swiftpixel.com/earbud/api/materials'); // Replace 'API_URL' with your actual API URL
       if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
       }
